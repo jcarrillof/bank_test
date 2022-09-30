@@ -1,8 +1,8 @@
 package com.example.bank_test.service;
 
+import com.example.bank_test.model.dto.ClienteRequestDTO;
 import com.example.bank_test.model.entity.Cliente;
 import com.example.bank_test.model.entity.Persona;
-import com.example.bank_test.model.dto.ClienteRequestDTO;
 import com.example.bank_test.repository.ClienteRepository;
 import com.example.bank_test.repository.PersonaRepository;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)

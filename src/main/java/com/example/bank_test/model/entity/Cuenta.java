@@ -1,7 +1,6 @@
 package com.example.bank_test.model.entity;
 
 import com.example.bank_test.model.dto.CuentaResponseDTO;
-import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

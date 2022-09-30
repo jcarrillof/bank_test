@@ -1,7 +1,7 @@
 package com.example.bank_test.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

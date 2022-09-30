@@ -1,7 +1,7 @@
 package com.example.bank_test.service;
 
-import com.example.bank_test.model.entity.Cliente;
 import com.example.bank_test.model.dto.ClienteRequestDTO;
+import com.example.bank_test.model.entity.Cliente;
 import com.example.bank_test.model.entity.Persona;
 import com.example.bank_test.repository.ClienteRepository;
 import com.example.bank_test.repository.PersonaRepository;
