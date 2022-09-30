@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    image: 'bank_test:latest'
+    build:
+      context: .
+    container_name: bank_test
+    depends_on:
+      - postgres
+    ports:
+      - '8080:8080'
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
+    environment:
+      - POSTGRES_PASSWORD=test12345
+    ports:
+      - '5432:5432'
+  flyway:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://postgres:5432/postgres -schemas=public -user=postgres -password=test12345 migrate
+    volumes:
+      - ./src/main/resources/db/migration/:/flyway/sql/
+    depends_on:
+      - postgres
