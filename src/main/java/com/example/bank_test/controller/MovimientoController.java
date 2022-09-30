@@ -4,7 +4,6 @@ import com.example.bank_test.model.dto.MovimientoRequestDTO;
 import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import com.example.bank_test.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +38,5 @@ public class MovimientoController {
                                                                                   @RequestParam String identificacion)
     {
         return ResponseEntity.ok(movimientoService.getMovimientosFechaUsuario(fecha, identificacion));
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleIllegalArgumentException(Exception exception){
-        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }

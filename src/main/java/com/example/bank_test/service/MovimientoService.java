@@ -30,24 +30,31 @@ public class MovimientoService {
     @Autowired
     private MovimientoRepository movimientoRepository;
     public void saveMovimiento(MovimientoRequestDTO movimientoRequestDTO) {
-        Cuenta cuenta = cuentaRepository.findByNumeroCuenta(movimientoRequestDTO.getNumeroCuenta());
-        List<Movimiento> movimientos = movimientoRepository.findByCuentaId(cuenta.getId());
-        double previousSaldo = cuenta.getSaldoInicial();
-        if (!movimientos.isEmpty()) {
-            previousSaldo = movimientos.get(movimientos.size()-1).getSaldo();
-            cuenta.setSaldoInicial(previousSaldo);
-            cuentaRepository.save(cuenta);
-        }
+        try {
+            Cuenta cuenta = cuentaRepository.findByNumeroCuenta(movimientoRequestDTO.getNumeroCuenta());
+            List<Movimiento> movimientos = movimientoRepository.findByCuentaId(cuenta.getId());
+            double previousSaldo = cuenta.getSaldoInicial();
+            if (!movimientos.isEmpty()) {
+                previousSaldo = movimientos.get(movimientos.size()-1).getSaldo();
+                cuenta.setSaldoInicial(previousSaldo);
+                cuentaRepository.save(cuenta);
+            }
 
-        if (movimientoRequestDTO.getTipoMovimiento().equals("debito") && previousSaldo == 0) {
-            throw new IllegalArgumentException("Saldo no disponible");
-        }
+            if (movimientoRequestDTO.getTipoMovimiento().equals("debito") && previousSaldo == 0) {
+                throw new IllegalArgumentException("Saldo no disponible");
+            }
 
-        double valor = setValorSign(movimientoRequestDTO.getValor(), movimientoRequestDTO.getTipoMovimiento());
-        double newSaldo = calculateSaldo(previousSaldo, valor);
-        Movimiento movimiento = new Movimiento(movimientoRequestDTO.getTipoMovimiento(), valor, newSaldo, cuenta);
-        movimientoRepository.save(movimiento);
-        cuenta.setSaldoInicial(newSaldo);
+            double valor = setValorSign(movimientoRequestDTO.getValor(), movimientoRequestDTO.getTipoMovimiento());
+            double newSaldo = calculateSaldo(previousSaldo, valor);
+            Movimiento movimiento = new Movimiento(movimientoRequestDTO.getTipoMovimiento(), valor, newSaldo, cuenta);
+            movimientoRepository.save(movimiento);
+            cuenta.setSaldoInicial(newSaldo);
+
+        } catch (IllegalArgumentException exception) {
+            throw exception;
+        } catch (Exception exception) {
+            throw new IllegalArgumentException("Problemas al hacer la transaccion");
+        }
     }
 
     public List<MovimientoResponseDTO> getMovimientos() {

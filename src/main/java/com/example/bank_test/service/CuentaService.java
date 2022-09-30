@@ -25,12 +25,16 @@ public class CuentaService {
     private CuentaRepository cuentaRepository;
 
     public void saveCuenta(CuentaRequestDTO cuentaRequestDTO) {
-        Persona persona = personaRepository.findByIdentificacion(cuentaRequestDTO.getIdentificacionCliente());
-        Cliente cliente = clienteRepository.findByPersonaId(persona.getId());
-        Cuenta cuenta = new Cuenta(cuentaRequestDTO.getNumeroCuenta(),
-                cuentaRequestDTO.getTipoCuenta(), cuentaRequestDTO.getSaldoInicial());
-        cuenta.setCliente(cliente);
-        cuentaRepository.save(cuenta);
+        try {
+            Persona persona = personaRepository.findByIdentificacion(cuentaRequestDTO.getIdentificacionCliente());
+            Cliente cliente = clienteRepository.findByPersonaId(persona.getId());
+            Cuenta cuenta = new Cuenta(cuentaRequestDTO.getNumeroCuenta(),
+                    cuentaRequestDTO.getTipoCuenta(), cuentaRequestDTO.getSaldoInicial());
+            cuenta.setCliente(cliente);
+            cuentaRepository.save(cuenta);
+        } catch (Exception exception) {
+            throw new IllegalArgumentException("Problemas al crear la cuenta");
+        }
     }
 
     public List<CuentaResponseDTO> getCuentas() {
