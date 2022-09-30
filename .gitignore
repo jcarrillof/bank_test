@@ -1,9 +1,9 @@
-README.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+postgres_data
 
 ### IntelliJ IDEA ###
 .idea
