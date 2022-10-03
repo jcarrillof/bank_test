@@ -14,6 +14,9 @@ import com.example.bank_test.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -62,12 +65,15 @@ public class MovimientoService {
         return movimientos.map(Movimiento::toDto).toList();
     }
 
-    public List<MovimientoResponseDTO> getMovimientosFechaUsuario(String fecha, String identificacion) {
+    public List<MovimientoResponseDTO> getMovimientosFechaUsuario(String startDate, String endDate, String identificacion) {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Persona persona = personaRepository.findByIdentificacion(identificacion);
         Cliente cliente = clienteRepository.findByPersonaId(persona.getId());
         List<Cuenta> cuentas = cuentaRepository.findByClienteId(cliente.getId());
         Stream<Movimiento> movimientosCuentas = movimientoRepository
-                .findAllByCuentaIdIn(cuentas.stream().map(Cuenta::getId).toList()).stream();
+                .findAllByCuentaIdInAndFechaBetween(cuentas.stream().map(Cuenta::getId).toList(),
+                        LocalDate.parse(startDate, dateFormat).atStartOfDay(),
+                        LocalDate.parse(endDate, dateFormat).atTime(LocalTime.MAX)).stream();
 
         return movimientosCuentas.map(Movimiento::toDtoCuentasFecha).toList();
     }

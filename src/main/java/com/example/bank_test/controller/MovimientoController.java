@@ -34,9 +34,11 @@ public class MovimientoController {
 
     @GetMapping(value = "/fechaUsuario",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<MovimientoResponseDTO>> getMovimientosFechaUsuario(@RequestParam String fecha,
+    public ResponseEntity<List<MovimientoResponseDTO>> getMovimientosFechaUsuario(@RequestParam String fechaInicio,
+                                                                                  @RequestParam String fechaFinal,
                                                                                   @RequestParam String identificacion)
     {
-        return ResponseEntity.ok(movimientoService.getMovimientosFechaUsuario(fecha, identificacion));
+        return ResponseEntity.ok(movimientoService.getMovimientosFechaUsuario(fechaInicio, fechaFinal,
+                identificacion));
     }
 }
