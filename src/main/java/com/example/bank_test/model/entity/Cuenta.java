@@ -1,6 +1,7 @@
 package com.example.bank_test.model.entity;
 
 import com.example.bank_test.model.dto.CuentaResponseDTO;
+import com.example.bank_test.model.enums.TipoCuenta;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Cuenta {
 
-    public Cuenta(String numeroCuenta, String tipoCuenta, double saldoInicial) {
+    public Cuenta(String numeroCuenta, TipoCuenta tipoCuenta, double saldoInicial) {
         this.numeroCuenta = numeroCuenta;
         this.tipoCuenta = tipoCuenta;
         this.saldoInicial = saldoInicial;
@@ -30,7 +31,8 @@ public class Cuenta {
 
     @Getter
     @Setter
-    private String tipoCuenta;
+    @Enumerated(EnumType.STRING)
+    private TipoCuenta tipoCuenta;
 
     @Getter
     @Setter

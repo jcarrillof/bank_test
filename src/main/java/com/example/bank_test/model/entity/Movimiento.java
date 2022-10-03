@@ -74,7 +74,7 @@ public class Movimiento {
     }
 
     private String getMovimientoMessage() {
-        if (this.getTipoMovimiento().equals("debito")) {
+        if (this.getTipoMovimiento().equals(TipoMovimiento.DEBITO)) {
             return "Retiro de " + Math.abs(this.getValor());
         }
         return "Deposito de " + this.getValor();

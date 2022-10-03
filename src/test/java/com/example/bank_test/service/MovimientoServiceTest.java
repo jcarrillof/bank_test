@@ -4,6 +4,7 @@ import com.example.bank_test.model.dto.MovimientoRequestDTO;
 import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import com.example.bank_test.model.entity.Cuenta;
 import com.example.bank_test.model.entity.Movimiento;
+import com.example.bank_test.model.enums.TipoCuenta;
 import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.repository.CuentaRepository;
 import com.example.bank_test.repository.MovimientoRepository;
@@ -127,7 +128,7 @@ class MovimientoServiceTest {
 
     @Test
     public void shouldGetAllMovimientos() {
-        Cuenta cuenta = new Cuenta("123", "ahorros", 100);
+        Cuenta cuenta = new Cuenta("123", TipoCuenta.AHORROS, 100);
         List<Movimiento> movimientos = new ArrayList<>();
         Movimiento movimiento = new Movimiento();
         movimiento.setTipoMovimiento(TipoMovimiento.CREDITO);
@@ -140,7 +141,7 @@ class MovimientoServiceTest {
         List<MovimientoResponseDTO> actualResponse = movimientoService.getMovimientos();
 
         assertThat(actualResponse).isNotEmpty();
-        assertThat(actualResponse.get(0).getTipoCuenta()).isEqualTo("ahorros");
+        assertThat(actualResponse.get(0).getTipoCuenta()).isEqualTo(TipoCuenta.AHORROS);
         assertThat(actualResponse.get(0).getTipoMovimiento()).isEqualTo("Deposito de 10.0");
         assertThat(actualResponse.get(0).getNumeroCuenta()).isEqualTo("123");
         assertThat(actualResponse.get(0).getEstado()).isEqualTo("true");

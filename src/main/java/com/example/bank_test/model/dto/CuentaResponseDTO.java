@@ -1,5 +1,6 @@
 package com.example.bank_test.model.dto;
 
+import com.example.bank_test.model.enums.TipoCuenta;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
 public class CuentaResponseDTO implements Serializable{
     private String numeroCuenta;
 
-    private String tipoCuenta;
+    private TipoCuenta tipoCuenta;
 
     private double saldoInicial;
 
