@@ -1,7 +1,7 @@
 package com.example.bank_test.controller;
 
-import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.model.dto.MovimientoRequestDTO;
+import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.service.MovimientoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

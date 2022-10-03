@@ -1,6 +1,7 @@
 package com.example.bank_test.controller;
 
 import com.example.bank_test.model.dto.ClienteRequestDTO;
+import com.example.bank_test.model.enums.Genero;
 import com.example.bank_test.service.ClienteService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,12 +32,11 @@ class ClienteControllerTest {
         String identificacion = "202930";
         String direccion = "Quito";
         String telefono = "0994923933";
-        String genero = "masculino";
         int edad = 20;
         String clienteId = "jose123";
         String contrasena = "passjose123";
         ClienteRequestDTO clienteRequestDTO = new ClienteRequestDTO(nombre, identificacion,
-                direccion, telefono, genero, edad, clienteId, contrasena);
+                direccion, telefono, Genero.MASCULINO, edad, clienteId, contrasena);
 
         ResponseEntity<String> responseEntity = clienteController.createCliente(clienteRequestDTO);
 

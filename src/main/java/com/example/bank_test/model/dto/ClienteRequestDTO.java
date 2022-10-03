@@ -1,5 +1,6 @@
 package com.example.bank_test.model.dto;
 
+import com.example.bank_test.model.enums.Genero;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class ClienteRequestDTO {
     private String telefono;
 
     @Getter
-    private String genero;
+    private Genero genero;
 
     @Getter
     private int edad;

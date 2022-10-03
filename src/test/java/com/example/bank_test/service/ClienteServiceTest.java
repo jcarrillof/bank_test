@@ -3,6 +3,7 @@ package com.example.bank_test.service;
 import com.example.bank_test.model.dto.ClienteRequestDTO;
 import com.example.bank_test.model.entity.Cliente;
 import com.example.bank_test.model.entity.Persona;
+import com.example.bank_test.model.enums.Genero;
 import com.example.bank_test.repository.ClienteRepository;
 import com.example.bank_test.repository.PersonaRepository;
 import org.junit.jupiter.api.Test;
@@ -40,12 +41,11 @@ public class ClienteServiceTest {
         String identificacion = "202930";
         String direccion = "Quito";
         String telefono = "0994923933";
-        String genero = "masculino";
         int edad = 20;
         String clienteId = "jose123";
         String contrasena = "passjose123";
         ClienteRequestDTO clienteRequestDTO = new ClienteRequestDTO(nombre, identificacion,
-                direccion, telefono, genero, edad, clienteId, contrasena);
+                direccion, telefono, Genero.MASCULINO, edad, clienteId, contrasena);
 
         clienteService.saveClienteInformation(clienteRequestDTO);
 

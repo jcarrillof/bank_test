@@ -1,10 +1,10 @@
 package com.example.bank_test.service;
 
-import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.model.dto.MovimientoRequestDTO;
 import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import com.example.bank_test.model.entity.Cuenta;
 import com.example.bank_test.model.entity.Movimiento;
+import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.repository.CuentaRepository;
 import com.example.bank_test.repository.MovimientoRepository;
 import org.junit.jupiter.api.Test;

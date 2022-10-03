@@ -1,5 +1,6 @@
 package com.example.bank_test.model.entity;
 
+import com.example.bank_test.model.enums.Genero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,8 @@ public class Persona {
 
     @Getter
     @Setter
-    private String genero;
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
 
     @Getter
     @Setter
