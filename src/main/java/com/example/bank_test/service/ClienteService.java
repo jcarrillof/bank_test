@@ -8,6 +8,8 @@ import com.example.bank_test.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ClienteService {
     @Autowired
@@ -27,6 +29,16 @@ public class ClienteService {
         Cliente cliente = new Cliente(clienteRequestDTO.getClienteId(), clienteRequestDTO.getContrasena());
         cliente.setPersona(persona);
         personaRepository.save(persona);
+        clienteRepository.save(cliente);
+    }
+
+    public void deleteCliente(Long id) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        if (clienteOptional.isEmpty()) {
+            throw new IllegalArgumentException("No existe en la base de datos");
+        }
+        Cliente cliente = clienteOptional.get();
+        cliente.setEstado("eliminado");
         clienteRepository.save(cliente);
     }
 }

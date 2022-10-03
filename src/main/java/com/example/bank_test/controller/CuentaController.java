@@ -16,9 +16,7 @@ public class CuentaController {
     @Autowired
     private CuentaService cuentaService;
 
-    @PostMapping(value = "/create",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createCuenta(@RequestBody CuentaRequestDTO cuentaRequestDTO)
     {
         cuentaService.saveCuenta(cuentaRequestDTO);

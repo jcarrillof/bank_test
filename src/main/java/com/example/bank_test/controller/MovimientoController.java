@@ -16,9 +16,7 @@ public class MovimientoController {
     @Autowired
     private MovimientoService movimientoService;
 
-    @PostMapping(value = "/create",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createMovimiento(@RequestBody MovimientoRequestDTO movimientoRequestDTO)
     {
         movimientoService.saveMovimiento(movimientoRequestDTO);
@@ -32,7 +30,7 @@ public class MovimientoController {
         return ResponseEntity.ok(movimientoService.getMovimientos());
     }
 
-    @GetMapping(value = "/fechaUsuario",
+    @GetMapping(value = "/reportes",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MovimientoResponseDTO>> getMovimientosFechaUsuario(@RequestParam String fechaInicio,
                                                                                   @RequestParam String fechaFinal,

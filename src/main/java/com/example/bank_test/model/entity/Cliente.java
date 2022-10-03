@@ -29,6 +29,7 @@ public class Cliente {
     private String contrasena;
 
     @Getter
+    @Setter
     private String estado;
 
     @Setter
