@@ -75,7 +75,7 @@ public class MovimientoService {
                         LocalDate.parse(startDate, dateFormat).atStartOfDay(),
                         LocalDate.parse(endDate, dateFormat).atTime(LocalTime.MAX)).stream();
 
-        return movimientosCuentas.map(Movimiento::toDtoCuentasFecha).toList();
+        return movimientosCuentas.map(Movimiento::toDtoWithFecha).toList();
     }
 
     private double setValorSign(double valor, TipoMovimiento movimiento) {

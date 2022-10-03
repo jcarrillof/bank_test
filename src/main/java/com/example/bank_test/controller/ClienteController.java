@@ -20,6 +20,18 @@ public class ClienteController {
         return ResponseEntity.ok().body("Cliente creado exitosamente");
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<String> updateCliente(@PathVariable Long id,
+                                                @RequestParam(required = false) String direccion,
+                                                @RequestParam(required = false) String telefono)
+    {
+        ClienteRequestDTO clienteRequestDTO = new ClienteRequestDTO();
+        clienteRequestDTO.setDireccion(direccion);
+        clienteRequestDTO.setTelefono(telefono);
+        clienteService.updateCliente(id, clienteRequestDTO);
+        return ResponseEntity.ok().body("Información actualizada exitosamente");
+    }
+
     @DeleteMapping(value = "/{id}")
     @ResponseBody
     public ResponseEntity<String> deleteCliente(@PathVariable Long id)

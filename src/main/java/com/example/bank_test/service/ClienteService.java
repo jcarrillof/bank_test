@@ -20,25 +20,31 @@ public class ClienteService {
 
     public void saveClienteInformation(ClienteRequestDTO clienteRequestDTO) {
         Persona persona = new Persona();
-        persona.setNombre(clienteRequestDTO.getNombre());
-        persona.setGenero(clienteRequestDTO.getGenero());
-        persona.setEdad(clienteRequestDTO.getEdad());
-        persona.setIdentificacion(clienteRequestDTO.getIdentificacion());
-        persona.setDireccion(clienteRequestDTO.getDireccion());
-        persona.setTelefono(clienteRequestDTO.getTelefono());
+        persona.fromDto(clienteRequestDTO);
         Cliente cliente = new Cliente(clienteRequestDTO.getClienteId(), clienteRequestDTO.getContrasena());
         cliente.setPersona(persona);
         personaRepository.save(persona);
         clienteRepository.save(cliente);
     }
 
+    public void updateCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
+        Cliente cliente = validateCliente(id);
+        cliente.getPersona().fromDtoUpdate(clienteRequestDTO);
+        cliente.setPersona(cliente.getPersona());
+        clienteRepository.save(cliente);
+    }
+
     public void deleteCliente(Long id) {
-        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        if (clienteOptional.isEmpty()) {
-            throw new IllegalArgumentException("No existe en la base de datos");
-        }
-        Cliente cliente = clienteOptional.get();
+        Cliente cliente = validateCliente(id);
         cliente.setEstado("eliminado");
         clienteRepository.save(cliente);
+    }
+
+    private Cliente validateCliente(Long id) {
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        if (clienteOptional.isEmpty()) {
+            throw new IllegalArgumentException("Cliente no existe en la base de datos");
+        }
+        return clienteOptional.get();
     }
 }

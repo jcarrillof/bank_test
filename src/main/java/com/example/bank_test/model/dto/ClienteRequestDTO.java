@@ -4,8 +4,11 @@ import com.example.bank_test.model.enums.Genero;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
+@NoArgsConstructor
 public class ClienteRequestDTO {
     @Getter
     private String nombre;
@@ -14,9 +17,11 @@ public class ClienteRequestDTO {
     private String identificacion;
 
     @Getter
+    @Setter
     private String direccion;
 
     @Getter
+    @Setter
     private String telefono;
 
     @Getter

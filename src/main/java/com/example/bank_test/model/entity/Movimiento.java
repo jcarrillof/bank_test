@@ -58,7 +58,7 @@ public class Movimiento {
         return movimientoResponseDTO;
     }
 
-    public MovimientoResponseDTO toDtoCuentasFecha() {
+    public MovimientoResponseDTO toDtoWithFecha() {
         MovimientoResponseDTO movimientoResponseDTO = new MovimientoResponseDTO();
 
         movimientoResponseDTO.setFecha(this.getFecha().toLocalDate());
