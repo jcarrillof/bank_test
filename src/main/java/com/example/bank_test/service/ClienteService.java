@@ -1,6 +1,7 @@
 package com.example.bank_test.service;
 
 import com.example.bank_test.model.dto.ClienteRequestDTO;
+import com.example.bank_test.model.dto.ClienteResponseDTO;
 import com.example.bank_test.model.entity.Cliente;
 import com.example.bank_test.model.entity.Persona;
 import com.example.bank_test.repository.ClienteRepository;
@@ -8,7 +9,9 @@ import com.example.bank_test.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class ClienteService {
@@ -25,6 +28,16 @@ public class ClienteService {
         cliente.setPersona(persona);
         personaRepository.save(persona);
         clienteRepository.save(cliente);
+    }
+
+    public List<ClienteResponseDTO> getClientes() {
+        Stream<Cliente> cuentas = clienteRepository.findAll().stream();
+        return cuentas.map(Cliente::toDto).toList();
+    }
+
+    public ClienteResponseDTO getCliente(Long id) {
+        Cliente cliente = validateCliente(id);
+        return cliente.toDto();
     }
 
     public void updateCliente(Long id, ClienteRequestDTO clienteRequestDTO) {

@@ -1,5 +1,6 @@
 package com.example.bank_test.model.entity;
 
+import com.example.bank_test.model.dto.ClienteResponseDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,4 +42,16 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Cuenta> cuenta;
+
+    public ClienteResponseDTO toDto() {
+        ClienteResponseDTO clienteResponseDTO = new ClienteResponseDTO();
+
+        clienteResponseDTO.setNombre(this.getPersona().getNombre());
+        clienteResponseDTO.setDireccion(this.getPersona().getDireccion());
+        clienteResponseDTO.setTelefono(this.getPersona().getTelefono());
+        clienteResponseDTO.setContrasena(this.getContrasena());
+        clienteResponseDTO.setEstado(this.getEstado());
+
+        return clienteResponseDTO;
+    }
 }
