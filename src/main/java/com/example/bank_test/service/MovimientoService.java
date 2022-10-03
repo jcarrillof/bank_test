@@ -1,6 +1,6 @@
 package com.example.bank_test.service;
 
-import com.example.bank_test.model.TipoMovimiento;
+import com.example.bank_test.model.enums.TipoMovimiento;
 import com.example.bank_test.model.dto.MovimientoRequestDTO;
 import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import com.example.bank_test.model.entity.Cliente;
