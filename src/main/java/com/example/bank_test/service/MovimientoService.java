@@ -40,7 +40,7 @@ public class MovimientoService {
                 cuentaRepository.save(cuenta);
             }
 
-            if (movimientoRequestDTO.getTipoMovimiento().equals("debito") && previousSaldo == 0) {
+            if (movimientoRequestDTO.getTipoMovimiento().equals(TipoMovimiento.DEBITO) && previousSaldo == 0) {
                 throw new IllegalArgumentException("Saldo no disponible");
             }
 
@@ -72,8 +72,8 @@ public class MovimientoService {
         return movimientosCuentas.map(Movimiento::toDtoCuentasFecha).toList();
     }
 
-    private double setValorSign(double valor, String movimiento) {
-        if (movimiento.equals(TipoMovimiento.debito.toString())) {
+    private double setValorSign(double valor, TipoMovimiento movimiento) {
+        if (movimiento.equals(TipoMovimiento.DEBITO)) {
             return -valor;
         }
         return valor;

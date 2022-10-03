@@ -1,5 +1,6 @@
 package com.example.bank_test.model.entity;
 
+import com.example.bank_test.model.TipoMovimiento;
 import com.example.bank_test.model.dto.MovimientoResponseDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 public class Movimiento {
-    public Movimiento(String tipoMovimiento, double valor, double saldo, Cuenta cuenta) {
+    public Movimiento(TipoMovimiento tipoMovimiento, double valor, double saldo, Cuenta cuenta) {
         this.fecha = LocalDateTime.now();
         this.tipoMovimiento = tipoMovimiento;
         this.valor = valor;
@@ -28,7 +29,8 @@ public class Movimiento {
 
     @Getter
     @Setter
-    private String tipoMovimiento;
+    @Enumerated(EnumType.STRING)
+    private TipoMovimiento tipoMovimiento;
 
     @Getter
     @Setter
@@ -51,7 +53,7 @@ public class Movimiento {
         movimientoResponseDTO.setTipoCuenta(this.getCuenta().getTipoCuenta());
         movimientoResponseDTO.setSaldoInicial(this.getCuenta().getSaldoInicial());
         movimientoResponseDTO.setEstado(this.getCuenta().getEstado());
-        movimientoResponseDTO.setTipoMovimiento(this.getTipoMovimiento());
+        movimientoResponseDTO.setTipoMovimiento(getMovimientoMessage());
 
         return movimientoResponseDTO;
     }
@@ -59,7 +61,7 @@ public class Movimiento {
     public MovimientoResponseDTO toDtoCuentasFecha() {
         MovimientoResponseDTO movimientoResponseDTO = new MovimientoResponseDTO();
 
-        movimientoResponseDTO.setFecha(this.getFecha());
+        movimientoResponseDTO.setFecha(this.getFecha().toLocalDate());
         movimientoResponseDTO.setNombre(this.getCuenta().getCliente().getPersona().getNombre());
         movimientoResponseDTO.setNumeroCuenta(this.getCuenta().getNumeroCuenta());
         movimientoResponseDTO.setTipoCuenta(this.getCuenta().getTipoCuenta());
@@ -69,5 +71,12 @@ public class Movimiento {
         movimientoResponseDTO.setSaldo(this.getSaldo());
 
         return movimientoResponseDTO;
+    }
+
+    private String getMovimientoMessage() {
+        if (this.getTipoMovimiento().equals("debito")) {
+            return "Retiro de " + Math.abs(this.getValor());
+        }
+        return "Deposito de " + this.getValor();
     }
 }

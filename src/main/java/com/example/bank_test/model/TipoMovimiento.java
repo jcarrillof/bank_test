@@ -1,5 +1,10 @@
 package com.example.bank_test.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum TipoMovimiento {
-    credito, debito
+    @JsonProperty("credito")
+    CREDITO,
+    @JsonProperty("debito")
+    DEBITO
 }

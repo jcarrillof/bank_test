@@ -1,5 +1,6 @@
 package com.example.bank_test.controller;
 
+import com.example.bank_test.model.TipoMovimiento;
 import com.example.bank_test.model.dto.MovimientoRequestDTO;
 import com.example.bank_test.service.MovimientoService;
 import org.junit.jupiter.api.Test;
@@ -26,10 +27,9 @@ class MovimientoControllerTest {
     {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        String tipoMovimiento = "debito";
         double valor = 15.0;
         String numeroCuenta = "2345";
-        MovimientoRequestDTO movimientoRequestDTO = new MovimientoRequestDTO(tipoMovimiento, valor, numeroCuenta);
+        MovimientoRequestDTO movimientoRequestDTO = new MovimientoRequestDTO(TipoMovimiento.DEBITO, valor, numeroCuenta);
 
         ResponseEntity<String> responseEntity = movimientoController.createMovimiento(movimientoRequestDTO);
 

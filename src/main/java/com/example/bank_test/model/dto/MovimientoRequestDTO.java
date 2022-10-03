@@ -1,12 +1,13 @@
 package com.example.bank_test.model.dto;
 
+import com.example.bank_test.model.TipoMovimiento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 public class MovimientoRequestDTO {
     @Getter
-    private String tipoMovimiento;
+    private TipoMovimiento tipoMovimiento;
 
     @Getter
     private double valor;

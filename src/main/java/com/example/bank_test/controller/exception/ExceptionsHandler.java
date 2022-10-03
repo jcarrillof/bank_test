@@ -12,14 +12,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionsHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleIllegalArgumentException(Exception exception){
+    public ResponseEntity<String> handleIllegalArgumentException(Exception exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
     @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<String> handleDataAccessException(){
+    public ResponseEntity<String> handleDataAccessException() {
         return ResponseEntity.internalServerError()
-                .body("Mas de un registro encontrado, contáctese con IT");
+                .body("Más de un registro encontrado, contáctese con IT");
     }
 }
