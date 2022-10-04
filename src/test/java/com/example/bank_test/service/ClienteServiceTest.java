@@ -66,7 +66,7 @@ public class ClienteServiceTest {
                 clienteService.updateCliente(cliente.getId(), new ClienteRequestDTO()));
 
         verify(clienteRepository, times(0)).save(clienteCaptor.capture());
-        assertThat(exception.getMessage()).isEqualTo("Cliente no existe en la base de datos");
+        assertThat(exception.getMessage()).isEqualTo("Cliente no existe");
     }
 
     @Test
@@ -147,6 +147,6 @@ public class ClienteServiceTest {
                 clienteService.deleteCliente(cliente.getId()));
 
         verify(clienteRepository, times(0)).save(clienteCaptor.capture());
-        assertThat(exception.getMessage()).isEqualTo("Cliente no existe en la base de datos");
+        assertThat(exception.getMessage()).isEqualTo("Cliente no existe");
     }
 }

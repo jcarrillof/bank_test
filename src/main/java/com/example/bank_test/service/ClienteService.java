@@ -56,7 +56,7 @@ public class ClienteService {
     private Cliente validateCliente(Long id) {
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
         if (clienteOptional.isEmpty()) {
-            throw new IllegalArgumentException("Cliente no existe en la base de datos");
+            throw new IllegalArgumentException("Cliente no existe");
         }
         return clienteOptional.get();
     }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
@@ -40,5 +41,13 @@ public class CuentaService {
     public List<CuentaResponseDTO> getCuentas() {
         Stream<Cuenta> cuentas = cuentaRepository.findAll().stream();
         return cuentas.map(Cuenta::toDto).toList();
+    }
+
+    public CuentaResponseDTO getCuenta(Long id) {
+        Optional<Cuenta> cuentaOptional = cuentaRepository.findById(id);
+        if (cuentaOptional.isEmpty()) {
+            throw new IllegalArgumentException("Cuenta no existe");
+        }
+        return cuentaOptional.get().toDto();
     }
 }
