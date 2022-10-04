@@ -39,6 +39,7 @@ public class Cuenta {
     private double saldoInicial;
 
     @Getter
+    @Setter
     private String estado;
 
     @Getter

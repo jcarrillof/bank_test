@@ -44,10 +44,21 @@ public class CuentaService {
     }
 
     public CuentaResponseDTO getCuenta(Long id) {
+        Cuenta cuenta = validateCuenta(id);
+        return cuenta.toDto();
+    }
+
+    public void deleteCuenta(Long id) {
+        Cuenta cuenta = validateCuenta(id);
+        cuenta.setEstado("eliminado");
+        cuentaRepository.save(cuenta);
+    }
+
+    private Cuenta validateCuenta(Long id) {
         Optional<Cuenta> cuentaOptional = cuentaRepository.findById(id);
         if (cuentaOptional.isEmpty()) {
             throw new IllegalArgumentException("Cuenta no existe");
         }
-        return cuentaOptional.get().toDto();
+        return cuentaOptional.get();
     }
 }
